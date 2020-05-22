@@ -1,0 +1,62 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple MOOC - Uma simples plataforma de ensino a distância" />
+    <title>{% block title %} Alilu {% endblock %}</title>
+
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
+
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="{% static 'core/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}" />
+    <!--<script src="{% static 'core/js/script.js' %}"></script>-->
+
+</head>
+<body>
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="/">Alilu-Ensino a Distância</a>
+        <ul>
+            <li class="pure-menu-selected"><a href="/">Início</a></li>
+            <li><a href="/cursos">Cursos</a></li>
+            <!--<li><a href="/forum">Fórum</a></li>-->
+            <li><a href="/contato">Contato</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/forum">Fórum</a></li>
+            <li><a href="/accounts/">Painel</a></li>
+            <li><a href="/accounts/logout">Sair</a></li>
+            {% else %}
+            <li><a href="/accounts/login">Entrar</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <div class="pure-g-r content-ribbon">
+        {% if messages %}
+        <aside class="pure-u-1">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </aside>
+        {% endif %}
+    </div>
+    {% block content %}{% endblock %}
+    <div class="footer">
+        Alilu - Uma simples plataforma de ensino a distância
+    </div>
+</div>
+<!-- Script do projeto --->
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{% endblock %}
+</body>
+</html>
